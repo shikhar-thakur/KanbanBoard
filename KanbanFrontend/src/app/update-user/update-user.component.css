@@ -1,0 +1,17 @@
+  
+  .center {
+    text-align: center;
+    font-size: 200%;
+    color: white;
+  }
+  
+  .center2 {
+    text-align: center;
+    color: white;
+    padding-left: 45%;
+  }
+  
+  .example-form{
+    max-width: auto;
+    text-align:center;
+  }

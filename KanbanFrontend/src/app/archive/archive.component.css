@@ -1,0 +1,17 @@
+mat-card {
+    /* max-width: 250px; */
+    margin-left: 50px;
+    width: 262px;
+    margin-top: 15px;
+    display: inline-block;
+    border-radius: 1%;
+
+}
+.bg{
+    background: url(src\assets\archive1.jpg);
+    background-size: cover;
+}
+body{
+    background: url(src\assets\todo1.jpg) no-repeat center center fixed;
+    background-size: cover;
+}

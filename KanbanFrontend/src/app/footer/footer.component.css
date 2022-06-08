@@ -1,0 +1,22 @@
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+
+    height:5vh;
+    background-color: rgb(234,173,30);
+    color: #c5c5c5;
+    text-align: center;
+    /* margin-top : px; */
+    /* box-shadow: 50px 30px 50px #4d3d69; */
+
+
+    /* transform: translate(0%,2%); */
+
+    /* border-radius: 10px; */
+
+    }
+
+
+

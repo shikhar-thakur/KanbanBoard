@@ -1,0 +1,219 @@
+<!-- <div class="x" style="Background-image:url(assets/a.jpg);"> -->
+  <mat-toolbar  style="position:sticky;background-color:rgb(235, 235, 235); box-shadow: 0px 0px 8px #D0E7EB;">
+    <P style="color:#5065D6; font-weight: 650; font-size: larger;margin-bottom: -5px;">Kanban Board</P>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button routerLink="notification"> Notification</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button  routerLink="archive">Archive</button>
+     <span class="example-spacer"></span>
+       <!-- <form (submit)="searchTask()" [formGroup]="searchForm"> -->
+       <!-- <mat-form-field appearance="outline" [style.width.px]=327 id="search-form" >
+         <mat-label>Search Task</mat-label>
+         <input  placeholder="Search" name="search" class="search" [formControl]="searchForm" >
+         <button mat-icon-button matSuffix (click)="searchTask()"><i class="fas fa-search"></i>
+             <mat-icon>search</mat-icon>b-6
+         </button>
+       </mat-form-field> -->
+       <!-- <div>
+          <input type="checkbox" id="check">
+         <div class="box">
+           <input type="text" style="color:#8c98da;" placeholder="Search" [formControl]="searchForm">
+         </div>
+       </div> -->
+       <!-- </form> -->
+         &nbsp;
+         <h6 style="font-family:'Cinzel',serif,cursive;color:#5065D6;">Hello, {{username}}</h6> &nbsp;&nbsp;
+         <button color="primary" mat-mini-fab [matMenuTriggerFor]="menu">+
+       </button>
+       <mat-menu #menu="matMenu">
+           <button mat-menu-item (click)="hide=!hide">
+             <mat-icon>settings</mat-icon>
+             <span>Change Password</span>
+           </button>
+           <button mat-menu-item (click)="loggedOut()">
+             <mat-icon>logout</mat-icon>
+             <span>Logout</span>
+           </button>
+         </mat-menu>
+     </mat-toolbar>
+   <div class="x"  >
+   <!-- Columns-->
+   <div class="row"  id="bgimg" *ngIf="todo.length!=0 || wip.length!=0 || done.length!=0">
+     <div class="example-container1" style="position:initial;margin-top:90px" >
+       <div class="card" style="margin:0 0;">
+       <h2 style="color: black;"><br>TO-DO<br></h2>
+       </div>
+       <!-- <hr> -->
+       <!-- <div> if there happens to be any scrollbar -->
+       <div
+         cdkDropList
+         #todoList="cdkDropList"
+         [cdkDropListData]="todo"
+         [cdkDropListConnectedTo]="[wipList, doneList]"
+         class="example-list"
+         (cdkDropListDropped)="drop($event, 'todo')">
+         <div *ngFor="let item of todo" cdkDrag>
+           <mat-card class="card" style="position:inherit;"(click)="clicked(item.taskTitle)">
+             <mat-card-title-group>
+               <mat-card-title style="color:black;font-size:18px; font-weight:600;">{{item.taskTitle}}</mat-card-title>
+               <mat-card-subtitle style="color:rgb(161, 161, 161);font-size:14px;font-weight:400;">{{item.taskDescription}}</mat-card-subtitle>
+               <mat-icon [ngStyle]="{'color':colorPriority(item.taskDeadLine)}"  matTooltip="{{item.taskDeadLine}}">timelapse</mat-icon>
+             </mat-card-title-group>
+             <div style="font-size:10px; font-weight:500;">Deadline: {{msg}} remaining</div>
+             <mat-progress-bar
+               class="example-margin"
+               ProgressBarMode = 'determinate'
+               [value]="value"
+               [color]="color"matTooltip="{{msg}}">
+             </mat-progress-bar>
+             <mat-card-actions align="end">
+               <button class="buttonupdate" (click)="updateTask(item)"><img src="https://img.icons8.com/material-sharp/18/000000/edit--v3.png"/></button>&nbsp;
+               <button class="buttondel" (click)="deleteTask(item.taskId)"><img src="https://img.icons8.com/ios-glyphs/18/000000/trash--v1.png"/></button>
+             </mat-card-actions>
+           </mat-card>
+         </div>
+       </div>
+       <!-- </div> scrollbar -->
+     </div>
+     <div class="example-container2"style="position:initial;margin-top:90px" >
+       <div class="card" style="margin:0 0;">
+       <h2 style="color: rgb(29, 90, 211);"><br> WORK IN PROGRESS<br></h2>
+       </div>
+       <!-- <hr> -->
+       <!--<div> <mat-slider vertical> -->
+       <div
+         cdkDropList
+         #wipList="cdkDropList"
+         [cdkDropListData]="wip"
+         [cdkDropListConnectedTo]="[todoList,doneList]"
+         class="example-list-2"
+         (cdkDropListDropped)="drop($event, 'wip')">
+         <div *ngFor="let item of wip" cdkDrag>
+           <mat-card class="card2" style="position:inherit;" (click)="clicked(item.taskTitle)">
+             <mat-card-title-group>
+               <mat-card-title style="color:black;font-size:18px; font-weight:600;">{{item.taskTitle}}</mat-card-title>
+               <mat-card-subtitle style="color:rgb(161, 161, 161);font-size:14px;font-weight:400;">{{item.taskDescription}}</mat-card-subtitle>
+               <mat-icon [ngStyle]="{'color':colorPriority(item.taskDeadLine)}"  matTooltip="{{item.taskDeadLine}}">timelapse</mat-icon>
+             </mat-card-title-group>
+             <div style="font-size:10px; font-weight:500;">Deadline: {{msg}} remaining</div>
+             <mat-progress-bar
+               class="example-margin"
+               ProgressBarMode = 'determinate'
+               [value]="value"
+               [color]="color"matTooltip="{{msg}}">
+             </mat-progress-bar>
+             <mat-card-actions align="end">
+               <button class="buttonupdate"(click)="updateTask(item)"><img src="https://img.icons8.com/material-sharp/18/000000/edit--v3.png"/></button>&nbsp;
+               <button class="buttondel" (click)="deleteTask(item.taskId)"><img src="https://img.icons8.com/ios-glyphs/18/000000/trash--v1.png"/></button>
+             </mat-card-actions>
+           </mat-card>
+         </div>
+       </div>
+    <!-- </div> </mat-slider> -->
+     </div>
+     <div class="example-container3" style="position:initial;margin-top:90px" >
+       <div>
+         <h2 class="card" style="margin:0 0; padding-bottom:14px; color: red;" >
+         <br>COMPLETED
+         <br></h2>
+       </div>
+   <!-- <hr> -->
+       <div
+         cdkDropList
+         #doneList="cdkDropList"
+         [cdkDropListData]="done"
+         [cdkDropListConnectedTo]="[wipList, todoList]"
+         class="example-list-3"
+         (cdkDropListDropped)="drop($event, 'done')">
+         <div *ngFor="let item of done" cdkDrag>
+           <mat-card class="card3"style="position:inherit;" (click)="clicked(item.taskTitle)">
+             <mat-card-title-group>
+               <mat-card-title style="color:black;font-size:18px; font-weight:bolder;">{{item.taskTitle}}</mat-card-title>
+               <mat-card-subtitle style="color:rgb(161, 161, 161);font-size:14px;font-weight:400;">{{item.taskDescription}}</mat-card-subtitle>
+               <mat-icon [ngStyle]="{'color':colorPriority(item.taskDeadLine)}"  matTooltip="{{item.taskDeadLine}}">timelapse</mat-icon>
+             </mat-card-title-group>
+             <!-- <mat-progress-bar
+               class="example-margin"
+               ProgressBarMode = 'determinate'
+               [value]="value"
+               [color]="color" matTooltip="{{msg}}">
+             </mat-progress-bar> -->
+             <div  style="color:teal; font-weight:800;text-align: center;">Task completed <div style="color:green; text-align: center;">{{msg}} remaining</div></div>
+             <mat-card-actions align="end">
+               <button class="buttondel" style="margin-right:115px; padding-left: 4em;padding-right:4em" (click)="deleteTask(item.taskId)"><img src="https://img.icons8.com/ios-glyphs/18/000000/trash--v1.png"/></button>
+             </mat-card-actions>
+           </mat-card>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!--No Columns-->
+   <div class="row" *ngIf="todo.length==0 && wip.length==0 && done.length==0">
+     <h1 style="text-align:center; padding: 20% 0px;">NOTHING IN HERE</h1>
+   </div>
+   <!--Update Task-->
+   <div class="field" *ngIf="hide==false">
+     <div class="example-button-container">
+       <button mat-fab color="primary" matSuffix (click)="hide = !hide">
+         <mat-icon>highlight_off</mat-icon>
+     </button>
+     </div>
+     <app-update-user [item]='user'></app-update-user>
+   </div>
+   <!--Task View-->
+   <div *ngIf="visibleTask==true" class="field2">
+     <div class="example-button-container">
+       <button mat-fab color="primary" matSuffix (click)="visibleTask = !visibleTask">
+         <mat-icon>highlight_off</mat-icon>
+     </button>
+     </div>
+       <app-task-view [item]="schtask"></app-task-view>
+   </div>
+   <!--Add Task-->
+   <div *ngIf="visibleForm==true" class="example-form">
+     <!-- <app-add-task [item]='defaultTask'></app-add-task> -->
+     <div class="field">
+       <h1 class="center">ADD / UPDATE TASK</h1>
+       <form [formGroup]="addTask" (ngSubmit)="onSubmit()" class="example-form">
+           <mat-form-field appearance="fill" [style.width.px]=227>
+               <mat-label>Title</mat-label>
+               <input matInput placeholder="Title" formControlName="taskTitle" #taskTitle required>
+           </mat-form-field>
+           <br><br>
+           <mat-form-field class="example-full-width" appearance="fill" [style.width.px]=227>
+               <mat-label>Deadline</mat-label>
+               <input matInput type="date" min="{{todayDate|date:'yyyy-MM-dd'}}" id="taskDeadLine" name="taskDeadLine" formControlName="taskDeadLine" required>
+           </mat-form-field>
+           <br><br>
+           <mat-form-field appearance="fill" [style.width.px]=227>
+               <mat-label>Status</mat-label>
+               <mat-select id="taskStatus" name="taskStatus" formControlName="taskStatus">
+               <mat-option value="todo">To-Do</mat-option>
+               <mat-option value="wip">Work In Progress</mat-option>
+               <mat-option value="wip">Complete</mat-option>
+               <!-- <mat-option value="done">Completed</mat-option> -->
+               </mat-select>
+           </mat-form-field>
+           <br><br>
+           <mat-form-field appearance="fill" [style.width.px]=227>
+               <mat-label>Description</mat-label>
+               <textarea matInput  placeholder="Description" formControlName="taskDescription" #taskDescription></textarea>
+           </mat-form-field>
+           <br>
+           <button class="buttonsr" style="padding:1vh 4vw;margin-left:30px;" type="submit">Add</button>&nbsp;
+           <br>
+           <br>
+       </form>
+     </div>
+     </div>
+   <!-- Add Button -->
+   <div class="add">
+     <div class="example-button-container">
+       <button class="buttonsr" color="primary" style="margin-bottom:6vh;" (click)="visibleForm = !visibleForm" [attr.aria-pressed]="visibleForm">
+         <mat-icon>{{visibleForm ? 'highlight_off' : 'add'}}</mat-icon>
+     </button>
+     </div>
+   </div>
+   <!--Footer-->
+   <app-footer ></app-footer>
+   </div>

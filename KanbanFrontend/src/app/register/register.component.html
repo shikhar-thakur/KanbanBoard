@@ -1,0 +1,56 @@
+<!--Professional code-->
+<body>
+
+  <div class="shape">
+    <div class="shape" id="a-container">
+
+      <form [formGroup]="register" (ngSubmit)="onSubmit()" class="form" id="a-form" >
+        <h2 class="form_title title">NEW USER</h2>
+
+        <input type="text" class="form__input" placeholder="Username" placeholder="FullName" formControlName="userName" #userName required >
+
+        <input type="text" class="form__input"  placeholder="Enter Email" id="emailIssd" formControlName="email" #email required>
+
+        <input type="password" class="form__input" placeholder="Create Password"  name="password"  formControlName="password" #pass required>
+
+        <input type="password" class="form__input" placeholder="Confirm Password" formControlName="confirm" #confirm required>
+
+        <button type="submit" class="cssbuttons-io-button submit">Create Account
+          <div class="icon">
+              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg>
+            </div>
+          </button>
+<br>
+        <div class="singup" style="text-align:center">Existing Account?
+          <a href="http://localhost:4200/" >Login</a>
+      </div>
+      </form>
+
+    </div>
+
+
+
+
+    <div class="switch" id="switch-cnt">
+      <div class="switch__circle"></div>
+      <div class="switch__circle switch__circle--t"></div>
+      <div class="switch__container" id="switch-c1">
+        <h2 class="switch__title title" style="margin-top: -30px;font-size: 30px;">Welcome To </h2>
+          <h2 class="switch__title title" style="margin-top: -70px;font-size: 40px; ">Kanban-Board</h2>
+          <h2 class="switch__title title" style="margin-top: -28px;font-size: 20px;" >First Create Account To Login !</h2>
+
+        <br>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+
+<script  src="function.js"></script>
+</body>
+
+
+
+
