@@ -1,0 +1,84 @@
+<div style="margin-left: auto; margin-right: auto;">
+    <mat-card >
+        <mat-card-title>Let's Go</mat-card-title>
+        <br>
+        <mat-card-content id="form">
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+                <label placeholder="email">Email</label> <br>
+                <i class="fa fa-envelope-o icon" style="margin-left: -3px;"></i>
+                <input  formControlName="email" placeholder = "Enter Your Email ID" >
+                <div *ngIf="email.invalid && ( email.touched)" class="alert alert" style="font-size: 12px;margin-top: -20px; margin-left: -27px;">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                    Email Address Is Mandatory
+                </div>
+                <div *ngIf="email.errors?.['pattern']"  class="alert alert" style="font-size: 12px; margin-left: -15px;margin-top: 10px;">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                    Enter Valid Email Id Ex: abc@gmail.com
+                </div>
+                <br><br>
+                <label placeholder="Username">Username</label> <br>
+                <i class="fa fa-user icon" style="margin-left: -3px;"></i>
+                <input  formControlName="userName" placeholder = "Enter Your Username" >
+                <div *ngIf="userName.invalid && ( userName.touched)" class="alert alert" style="font-size: 12px;margin-top: -20px; margin-left: -27px;">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                    Username Is Mandatory
+                </div>
+                <br><br>
+
+                <label placeholder="Password" >Password</label><br>
+                <i class="fa fa-lock" style="font-size: 20px;margin-top: 11px; color: rgba(0, 0, 0, 0.459);"></i>
+                <input type="password" formControlName="password" placeholder="Enter Your Password" required>
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert" style="font-size: 12px;margin-top: -20px; margin-left: -27px;">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                    Password Is Mandatory
+                </div>
+
+                <br><br>
+
+                <label placeholder="address" >Address</label><br>
+                <i class="fa fa-home icon" style="font-size: 20px;margin-top: 10px; margin-left: -5px;" ></i>
+                <input formControlName="address" placeholder="Enter Your Address" >
+                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert" style="font-size: 12px;margin-top: -20px; margin-left: -27px;">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                    Address Is Mandatory
+                </div>
+
+                <br><br>
+
+                <label placeholder="phoneNo" >Mobile Number</label><br>
+                <i class="fa fa-phone" style="font-size: 18px;margin-top: 14px;margin-left: -2px; "></i>
+                <input formControlName="phoneNo" placeholder="Enter Your Mobile Number" >
+                <div *ngIf="phoneNo.invalid && (phoneNo.touched)" class="alert alert" style="font-size: 12px;margin-top: -20px; margin-left: -27px;">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                    Phone Number Is Mandatory
+                </div>
+                <div *ngIf="phoneNo.errors?.['pattern']"  class="alert alert" style="font-size: 12px; margin-left: -15px;margin-top: 10px;">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                    Phone Number Should be min 10 numbers.
+                </div>
+              
+                <br><br>
+
+                <button mat-raised-button [disabled]="!registerForm.valid" >Register</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

@@ -1,0 +1,21 @@
+<div>
+  <mat-sidenav-container  class="sidenav-container;col-md-12" style="background: url(./assets/459754.jpg);" class="image">
+    <div style="position: fixed;">
+      <!-- <a routerLink="/login" ><img  src="./assets/R.png" class="logo"></a> -->
+      <a routerLink="/login"><img src="./assets/pngwing.com.png" class="logo"></a>
+      <H2 style="margin-left: 50px;font-family: Verdana, Geneva, Tahoma, sans-serif;font-weight: bolder;">KANBAN BOARD</H2>
+      <div style="margin-left: 1300px; margin-top: -60px;">
+        <button mat-raised-button color="primary" routerLink="login" style="background-color: purple; position: fixed;">Login</button>
+        <button mat-raised-button color="primary" routerLink="signup" style="background-color: white; color: purple; margin-left: 90px;position: fixed;">Sign Up</button>
+      </div>
+    </div>
+ 
+    <router-outlet>
+
+    </router-outlet>
+
+    <df-messenger intent="WELCOME" chat-title="Kanban AI" agent-id="13417daa-451d-465d-b10f-3d0e938d0709"
+      language-code="en">
+    </df-messenger>
+  </mat-sidenav-container>
+</div>

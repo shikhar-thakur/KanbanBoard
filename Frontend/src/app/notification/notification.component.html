@@ -1,0 +1,59 @@
+<div>
+    <a routerLink="/homepage" style="position: fixed;" ><img  src="./assets/R.png" class="logo"></a>
+    <div style="text-align: center;margin-top: 5%;font-size: 25px;font-weight: 500;">Kanban Notifications</div>
+    <button mat-raised-button color="primary" routerLink="/homepage" style="background-color: purple; position: fixed;margin-left: 90%;margin-top: -30px;">Home</button>
+
+<mat-card id="notifications">
+    <p style="font-size: 18px;font-weight: 500;margin-left: 20px;margin-top: -5px;width: 70px;display: flex;line-height: 25px;">{{total}} tasks</p>
+    <span style="border: 1px solid white; border-radius: 15px;margin-left: 100px;background-color: white; color: rgba(0, 0, 255, 0.63);font-size: 13px;font-weight: 500; margin-top: -35px;display: block;width: 90px;margin-bottom: 15px;text-align: center;">OVERDUE</span>
+
+    <div *ngIf="total == 0" style="text-align: center;font-size: 17px;font-weight: 500;color: rgba(0, 0, 0, 0.418);margin-bottom: 20px;margin-top: 15px;">
+        There are no Notifications
+    </div>
+
+    <div *ngFor="let notific of notifications">
+        <!-- <div *ngIf="notific.taskName!=null"> -->
+            <mat-card id="matCard">
+                <div >
+                    <div style="margin-top: 3px; float: left;margin-left: 10px;">
+                        <mat-icon style="font-size: 16px; border: 1px solid black; width: 12px; height: 13px; margin-right: 5px;background-color: rgba(0, 0, 0, 0.925);border-radius: 2px;">check_box_outline_blank</mat-icon>
+                    </div>
+                    <span style="font-size: 18px; font-weight: 600;margin-top: 0px;margin-left: 10px;float: left;margin-right: 15px;">{{notific.taskName}}/{{notific.statusName}}</span>
+                </div>
+    
+                <div style="display: flex;margin-left: 72%;margin-top: -3px;">
+                    <mat-icon  style="font-size: 20px;margin-top: 2px;">workspaces</mat-icon>
+                    <span style="font-size: 17px;font-weight: 500;margin-right: 30px;">{{notific.space}}</span>
+                </div>
+    
+                <div style="border: 0.5px solid rgba(0, 0, 0, 0.075);margin-top: 13px; width: 900px; margin-left: -15px;"></div>
+                <div style="background-color: rgba(255, 0, 0, 0.055); width: 900px; margin-left: -16px; margin-top: -1px; padding: 10px; border-radius: 8px;height: 60px;">
+                    <div style="float: left;border: 1px solid rgba(255, 0, 0, 0.685); margin-top: 9px; color: white;background-color: rgba(255, 0, 0, 0.685);padding-left: 10px;padding-right: 10px;border-radius: 15px;margin-left: 10px;padding-top: 1px;padding-bottom: 1px;">{{notific.notification.notification}}</div>
+                    <div style="margin-left: 200px; margin-top: 10px;color: rgba(255, 0, 0, 0.685);">End in {{notific.expiryDate | date:'MMMM dd' }}</div>
+                    <div style="text-align: right; margin-top: -21px;margin-right: 30px;color: rgba(0, 0, 0, 0.486);font-size:14px;">
+                        {{cdate | date:'MMMM dd'}} at {{cdate | date:'hh:mm a'}}
+                    </div>
+                </div>
+                
+                <!-- <div style="position: fixed;">
+                    <mat-icon style="font-size: 20px;margin-left: 65%;float: left;margin-right: auto;margin-top: 2px;">workspaces</mat-icon>
+                    <span style="text-align: right;font-size: 17px;font-weight: 500;">{{notific.space}}</span>
+                </div> -->
+                
+                <!-- <div style="border: 0.5px solid rgba(0, 0, 0, 0.075);margin-top: 15px; width: 900px; margin-left: -15px;"></div>
+                <div style="background-color: rgba(255, 0, 0, 0.055); width: 900px; margin-left: -16px; margin-top: -1px; padding: 10px; border-radius: 8px;height: 60px;">
+                    <div style="float: left;border: 1px solid rgba(255, 0, 0, 0.685); margin-top: 9px; color: white;background-color: rgba(255, 0, 0, 0.685);padding-left: 10px;padding-right: 10px;border-radius: 15px;margin-left: 10px;padding-top: 1px;padding-bottom: 1px;">{{notific.notification.notification}}</div>
+                    <div style="margin-left: 200px; margin-top: 10px;color: rgba(255, 0, 0, 0.685);">End in {{notific.expiryDate | date:'MMMM dd' }}</div>
+                    <div style="text-align: right; margin-top: -21px;margin-right: 30px;color: rgba(0, 0, 0, 0.486);font-size:14px;">
+                        {{cdate | date:'MMMM dd'}} at {{cdate | date:'hh:mm a'}}
+                    </div>
+                </div> -->
+            </mat-card>
+        <!-- </div> -->
+    </div>
+</mat-card>
+
+<div style="text-align: center; margin-top: 40px;margin-bottom: 50px;font-size: 17px; font-weight: 500; color: rgba(0, 0, 0, 0.349);">
+    You've Seen it all.
+</div>
+</div>

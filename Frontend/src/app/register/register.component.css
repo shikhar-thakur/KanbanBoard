@@ -1,0 +1,106 @@
+/* form>input
+{
+    width: 90%; 
+    height: 30px; 
+    margin-left: 25px; 
+    border-radius: 10px;
+} */
+
+div
+{
+    margin-top: 10%; 
+    border-radius: 40px;
+}
+
+#form>form>input
+{
+    width: 360px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.233);
+    border-radius: 9px;
+    margin-right: 20px;
+    margin-left: -15px;
+    padding: 9px;
+    margin-top: 2px;
+    padding-left: 40px;
+}
+
+#form>form>i
+{
+    font-size: 16px;
+    margin-top: 13px; 
+    position: absolute;
+    color: rgba(0, 0, 0, 0.459);
+}
+
+
+#form>form>input:hover
+{
+    border: 1px solid rgba(0, 0, 0, 0.664);
+}
+
+
+#form>form>label
+{
+    margin-left: -11px;
+    font-size: 12px;
+    color: black;
+}
+
+mat-card
+{
+    height: auto;
+    margin-top: -3%;
+    border-radius: 15px;
+    width: 465px;
+    margin-left: auto; 
+    margin-right: auto; 
+
+}
+
+#form
+{
+    margin-top: -30px;
+   margin-left: 30px;
+   padding: 20px;
+}
+
+#form>form>button
+{
+    width: 358px; 
+    margin-left: -13px;
+    margin-top: 8px;
+    border-radius: 7px;
+    height: 48px;
+    background-color: rgba(88, 63, 247, 0.753);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+     
+}
+
+mat-card>mat-card-title
+{
+    text-align: center; 
+    margin-top: 20px; 
+    font-size: 30px; 
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.747);
+    word-spacing: 5px;
+    letter-spacing: 0.5px;
+}
+
+#form>form>button:hover
+{
+    background-color: rgba(88, 63, 247, 0.884);
+}
+
+#form>form>div
+{
+    height: 20px;
+    margin-top: -0px;
+    color: red;
+    margin-left: -10px;
+    margin-bottom: -25px;
+    
+}

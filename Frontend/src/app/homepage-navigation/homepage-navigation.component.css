@@ -1,0 +1,59 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position:static;
+  top: 0;
+  z-index: 1;
+}
+
+.logo
+{
+  margin-top: 13px;
+  margin-left: 20px;
+  width: 140px;
+  height: 50px;
+}
+
+.high
+{
+  border-top: 4px solid red;
+  color: red;
+}
+.medium
+{
+  color:orange;
+  border-top: 4px solid orange;
+}
+.low
+{
+  color:green;
+  border-top: 4px solid green;
+}
+
+.marginName
+{
+  margin-top: 62px;
+}
+
+.container
+{
+  height:400px;
+}
+.task
+{
+  height: 100px;
+}
+.merge
+{
+  margin-top: -90px;
+}

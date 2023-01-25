@@ -1,0 +1,48 @@
+    
+<div >
+    <mat-card style="margin-left: auto; margin-right: auto;">
+        <mat-card-title >Welcome back!</mat-card-title>
+        <br> <br>
+        <mat-card-content id="form">
+            <form [formGroup]="loginform" (ngSubmit)="login()" style=" text-transform: capitalize;">
+                <label >Email</label> <br>
+                <i class="fa fa-envelope-o icon" ></i>
+                <input class="field" type="text" formControlName="email" placeholder="Enter Your Email" >
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert" style="font-size: 12px; margin-top: -20px; margin-left: -27px;">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                        Email Adress Is Mandatory
+                </div>
+
+                <br><br>
+
+                <label >Password</label> <br>
+                <i class="fa fa-lock" style="font-size: 20px;margin-top: 11px; color: rgba(0, 0, 0, 0.459);"></i>
+                <input type="password" formControlName="password" placeholder="Enter Your Password" >
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert" style="font-size: 12px; margin-top: -20px; margin-left: -27px; ">
+                    <div style="margin-left: 1px; margin-top: 3px;">
+                        <mat-icon style="float: left; font-size: 16px;" >warning</mat-icon>
+                    </div >
+                    Password Is Mandatory
+                </div>
+
+                <br><br>
+
+                <button mat-raised-button >Login</button>
+                <br>
+            </form>
+        </mat-card-content>
+        <button mat-stroked-button style="margin-left: 470px; color: rgba(0, 0, 0, 0.66);margin-top: -100px;font-size: 12px;"><div class="material-symbols-rounded" MatIcon style="display: block;margin-left: 3px;margin-bottom: -8px;font-size: 22px; color: rgba(0, 0, 0, 0.509);">help_center</div>Help</button>
+    </mat-card>
+   
+</div>
+<div style="color: black; font-size: 14px;font-weight: 500; margin-top: 30px;text-align: center;">
+    Don't have an account? <a routerLink="/signup" style="color: black;font-size: 14px;font-weight: 500;">Sign up</a>
+</div>
+
+
+
+
+<link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,300,0,-25" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

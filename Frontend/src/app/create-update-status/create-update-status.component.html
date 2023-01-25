@@ -1,0 +1,17 @@
+<form action="submit" [formGroup]="statusForm" >
+    <div style="text-align:center;font-size:15px; font-weight:500; color:rgba(0, 0, 0, 0.594)">Lets's Update!</div>
+    <div>
+      <mat-form-field appearance="standard">
+        <input matInput type="text" class="form-control" formControlName="statusName"/>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button mat-icon-button matTooltip="Update Status" color="primary" type="submit" [disabled]=!statusForm.valid (click)="statusUpdate(statusForm.value)">
+        <mat-icon >check_circle</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Clear" color="warn" type="submit"(click)="setNull()" >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+</form>

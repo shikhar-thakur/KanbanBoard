@@ -1,0 +1,31 @@
+#notifications
+{
+  margin-top: 4%;
+  width: 942px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 25px;
+  border-radius:12px ;
+  background-color: rgba(169, 169, 169, 0.493);
+  padding-bottom: 25px;
+    
+}
+
+#matCard
+{
+  width: 900px;
+  margin-left: 5px;
+  margin-top: 8px;
+  border-radius: 6px;
+  height: 112px;
+    
+}
+
+
+.logo
+{
+  margin-top: -30px;
+  margin-left: 5px;
+  width: 140px;
+  height: 55px;
+}

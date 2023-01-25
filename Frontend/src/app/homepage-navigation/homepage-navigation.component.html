@@ -1,0 +1,273 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <!-- Side Navigation -->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <a><img src="./assets/R.png" class="logo"></a>
+
+    <mat-nav-list>
+
+      <!-- Notification Button -->
+      <mat-list-item routerLink="/notifications"
+        style="font-size: 16px;margin-top: 20px;margin-left: 15px;width: 150px;">
+        <span class="material-symbols-rounded">notifications</span>
+        Notifications
+      </mat-list-item>
+
+
+      <!-- Create New Space -->
+      <form action="submit" #spaceForm="ngForm" style="margin-top: -10px;">
+        <div class="form-group">
+          <mat-form-field class="col-md-6" appearance="standard"
+            style="margin-left: 10px; width: 170px; text-align: center;">
+            <input matInput name="spaceName" [(ngModel)]="space.spaceName" type="text" class="form-control"
+              #spaceName="ngModel" placeholder="Space Name" required maxlength="50" />
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]=!spaceForm.valid (click)="createSpace()"
+          style="margin-left: 10px; width: 170px;">Create Space
+        </button>
+      </form>
+
+      <!-- Displaying All the Spaces -->
+      <div style="margin-top: 15px;">
+        <div *ngFor="let s of spaces">
+          <a mat-list-item (click)="getStatus(s)" style="margin-top: -12px;">{{s.spaceName}}
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon style="font-size: 17px;">more_vert</mat-icon>
+            </button>
+          </a>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="deleteSpace(s)">
+              <mat-icon style="font-size: 20px;">delete_forever</mat-icon><span
+                style="font-size: 14px;  margin-left: -12px;">Delete Task</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+
+      <mat-list-item>
+        <mat-card
+          style="margin-top: 350px;text-align: center; border: 1px solid rgba(0, 0, 0, 0.235);padding: 13px;border-radius: 8px;width: 250px; ">
+          <h4 style="font-weight: 500; color:rgba(0, 0, 0, 0.445)">Priority Levels</h4>
+          <div style="display: flex; margin-left: 5px;">
+            <i class="fa fa-stop" style="margin-left:-3px; font-size: 17px;color: red;"></i>
+            <mat-card-subtitle style="margin-top: -2px; margin-left:3px;color: black;">---- High Priority
+            </mat-card-subtitle>
+          </div>
+          <div style="display: flex;margin-left: 5px; ">
+            <i class="fa fa-stop" style="margin-left:-3px; font-size: 17px;color: orange;"></i>
+            <mat-card-subtitle style="margin-top: -2px; margin-left:3px;color: black;">---- Medium Priority
+            </mat-card-subtitle>
+          </div>
+          <div style="display: flex;margin-left: 5px; ">
+            <i class="fa fa-stop" style="margin-left:-3px; font-size: 17px;color: green;"></i>
+            <mat-card-subtitle style="margin-top: -2px; margin-left:3px;color: black;">---- Low Priority
+            </mat-card-subtitle>
+          </div>
+        </mat-card>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+    <mat-toolbar style="z-index: 4;position: fixed;background-color: rgba(211, 211, 211, 0.918)">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span style="position: fixed;">KanBan Board</span>
+      <h3 style="margin-left:35%;">Welcome,{{userName}}</h3>
+      <button mat-button matTooltip="Manage Profile" style="margin-left: 74%; font-size: 17px; position: fixed;"
+        [matMenuTriggerFor]="menu">
+        <mat-icon style="margin-top: -4px;margin-right: 4px;">person</mat-icon>Account
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openProfile()">
+          <mat-icon style="width: 10px;font-size: 19px;">account_circle</mat-icon>Profile
+        </button>
+        <button mat-menu-item routerLink="/login" style="margin-top: -12px;">
+          <mat-icon style="width: 10px; font-size: 19px;">logout</mat-icon>Logout
+        </button>
+      </mat-menu>
+
+    </mat-toolbar>
+
+
+    <!-- Add Content Here -->
+    <div style="display:flex; ">
+
+      <!-- All status by space and email component -->
+      <div style="display:inline-flex;margin-top: 80px;">
+        <div *ngFor="let s of status" style=" width:400px; margin:1%;display: block;">
+          <mat-card style="display: block;height: min-content;">
+            {{s.statusName}}
+
+            <button mat-icon-button [matMenuTriggerFor]="menu"
+              style="float: right;margin-top: -10px;align-items: center; color: black;">
+              <mat-icon style="font-size: 19px;">more_horiz</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="updateStatus(s)">
+                <mat-icon style="font-size: 19px;">edit</mat-icon><span
+                  style="font-size: 14px; margin-left: -12px;">Rename Status</span>
+              </button>
+              <button mat-menu-item (click)="deleteStatus(s)" style="margin-top: -15px;">
+                <mat-icon style="font-size: 20px;">delete_forever</mat-icon><span
+                  style="font-size: 14px;  margin-left: -12px;">Delete Status</span>
+              </button>
+            </mat-menu>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- ADD STATUS element -->
+      <div style="margin:1%;align-items:flex-end;margin-top: 100px;margin-left: 10px;">
+        <div *ngIf="num==1">
+          <button mat-button (click)="viewStatusForm()">+ Status</button>
+        </div>
+
+        <div *ngIf="num==2" style="width:max-content; margin-top: -25px;height: min-content;margin-right: 30px; ">
+          <form action="submit" #StatusForm="ngForm">
+            <div class="form-group">
+              <mat-form-field appearance="standard">
+                <input matInput name="statusName" [(ngModel)]="newStatus.statusName" type="text" class="form-control"
+                  #spaceName="ngModel" placeholder="Status Name" required maxlength="50" />
+              </mat-form-field>
+              <button mat-icon-button color="primary" type="submit" [disabled]=!StatusForm.valid
+                (click)="createStatus()">
+                <mat-icon>done</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" (click)="cancelMethod()">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- All Tasks -->
+    <div cdkDropListGroup style="display: inline-flex;">
+      <div *ngFor="let taskArray of ArrayOfList" style=" width:400px; margin:1%;">
+
+        <!-- Add new Task -->
+        <div
+          *ngIf="taskArray[0].statusName != 'Completed' && taskArray[0].statusName != 'completed' &&taskArray[0].statusName != 'Deleted' && taskArray[0].statusName != 'deleted' ">
+
+          <mat-expansion-panel style="display: block;height: min-content;width: min-content;margin: 2%;">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                + Task
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+
+            <form action="submit" #TaskForm="ngForm">
+
+              <div class="form-group">
+                <mat-form-field appearance="legacy">
+                  <input matInput name="taskName" [(ngModel)]="newTask.taskName" type="text" class="form-control"
+                    #taskName="ngModel" placeholder="Task Name" required maxlength="50" />
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                  <input matInput name="taskName" [(ngModel)]="newTask.taskDescription" type="text" class="form-control"
+                    #taskDescription="ngModel" placeholder="Task Description" maxlength="100" />
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                  <mat-label>Priority</mat-label>
+                  <mat-select name="priority" [(ngModel)]="newTask.priority">
+                    <mat-option value="High"> High </mat-option>
+                    <mat-option value="Low">Low</mat-option>
+                    <mat-option value="Medium">Medium</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                  <mat-label>Enter a date range</mat-label>
+                  <mat-date-range-input [rangePicker]="picker" [min]="currentDate">
+                    <input matStartDate placeholder="Start date" name="startDate" [(ngModel)]="newTask.startDate"
+                      class="form-control" #startDate="ngModel">
+                    <input matEndDate placeholder="End date" name="endDate" [(ngModel)]="newTask.endDate"
+                      class="form-control" #endDate="ngModel">
+                  </mat-date-range-input>
+                  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+              </div>
+
+              <div style="display: inline-flex;">
+                <button mat-icon-button color="primary" type="submit" [disabled]=!TaskForm.valid
+                  (click)="addTask(taskArray)">
+                  <mat-icon>done</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="nullValues()">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        </div>
+
+        <!-- Retriving tasks and showing all tasks--------------------------------- -->
+        <div *ngIf="!isArray(taskArray); else arrayView"></div>
+        <ng-template #arrayView>
+          <cdk-virtual-scroll-viewport itemSize="taskArray.length" style="height:330px;" cdkDropList
+            [cdkDropListData]="taskArray" (cdkDropListDropped)="drop($event)"
+            [ngClass]="{'marginName' : taskArray[0].statusName=='completed' || taskArray[0].statusName=='Completed' || taskArray[0].statusName=='Deleted' || taskArray[0].statusName=='deleted'}">
+            <div class="merge">
+              <div *cdkVirtualFor="let task of taskArray" class="task" cdkDrag [cdkDragData]="task">
+                <div *ngIf="task.taskName!=null">
+                  <mat-card style="margin: 1%;margin-top: 5px;"
+                    [ngClass]="{'high': task.priority=='High', 'medium': task.priority=='Medium' , 'low': task.priority=='Low'}"
+                    class="card">
+                    <mat-card-title style="font-size:17px;color: black;">{{task.taskName}}</mat-card-title>
+                    <button mat-icon-button [matMenuTriggerFor]="menu"
+                      style="float: right;margin-top: -20px;align-items: center; color: black;">
+                      <mat-icon style="font-size: 17px;">more_vert</mat-icon>
+                    </button>
+
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="updateTask(task)">
+                        <mat-icon style="font-size: 19px;">edit</mat-icon><span
+                          style="font-size: 14px; margin-left: -12px;">Update Task</span>
+                      </button>
+                      <button mat-menu-item (click)="deleteTask(task)" style="margin-top: -15px;">
+                        <mat-icon style="font-size: 20px;">delete_forever</mat-icon><span
+                          style="font-size: 14px;  margin-left: -12px;">Delete Task</span>
+                      </button>
+                    </mat-menu>
+                    <div style="display: flex; margin-left: -4px;margin-top: -4px;margin-bottom: auto;">
+                      <mat-icon style="margin-left:-3px; font-size: 22px;">tour</mat-icon>
+                      <mat-card-subtitle style="margin-top: 0px; margin-left:3px"> {{task.taskDescription}}
+                      </mat-card-subtitle>
+                    </div>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </ng-template>
+
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<link rel="stylesheet"
+  href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<link rel="stylesheet"
+  href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
